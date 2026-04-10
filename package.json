@@ -1,0 +1,31 @@
+{
+  "name": "wechat-work-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js",
+    "check:groupchats": "node src/scripts/check-groupchats.js",
+    "send:group-broadcast": "node src/scripts/send-group-broadcast.js",
+    "wechaty": "node src/wechaty/index.js",
+    "wechaty:simulate": "node src/wechaty/simulate.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "axios": "^1.13.6",
+    "crypto-js": "^4.2.0",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "nodemon": "^3.1.14",
+    "qrcode-terminal": "^0.12.0",
+    "wechaty": "^1.20.2",
+    "wechaty-plugin-contrib": "^1.12.2",
+    "wechaty-puppet-mock": "^1.18.2",
+    "xml2js": "^0.6.2"
+  }
+}
