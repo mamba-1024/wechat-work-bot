@@ -29,7 +29,7 @@ function getReply({ text, isRoom, mentioned }) {
 function createBot() {
   const bot = WechatyBuilder.build({
     name: process.env.WECHATY_NAME || 'wechaty-bot',
-    // puppet: process.env.WECHATY_PUPPET || undefined,
+    puppet: process.env.WECHATY_PUPPET || undefined,
     // puppetOptions: process.env.WECHATY_PUPPET_TOKEN
     //   ? { token: process.env.WECHATY_PUPPET_TOKEN }
     //   : undefined,
