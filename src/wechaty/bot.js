@@ -26,13 +26,30 @@ function getReply({ text, isRoom, mentioned }) {
   return `已收到：${t}`
 }
 
+/** wechaty-puppet 层 Watchdog 默认 60s；网页未就绪或长时间未扫码时，浏览器 heartbeat 可能喂不上狗。 */
+function buildPuppetOptions() {
+  const puppet = process.env.WECHATY_PUPPET || ''
+  if (!puppet.includes('puppet-wechat')) {
+    return undefined
+  }
+  const parsed = parseInt(process.env.WECHATY_PUPPET_TIMEOUT_SECONDS || '180', 10)
+  const timeoutSeconds = Number.isFinite(parsed) && parsed > 0 ? parsed : 180
+  const opts = {
+    timeoutSeconds,
+    uos: process.env.WECHATY_PUPPET_WECHAT_UOS !== '0',
+  }
+  const extspam = process.env.WECHATY_PUPPET_WECHAT_EXTSPAM
+  if (extspam) {
+    opts.token = extspam
+  }
+  return opts
+}
+
 function createBot() {
   const bot = WechatyBuilder.build({
     name: process.env.WECHATY_NAME || 'wechaty-bot',
     puppet: process.env.WECHATY_PUPPET || undefined,
-    // puppetOptions: process.env.WECHATY_PUPPET_TOKEN
-    //   ? { token: process.env.WECHATY_PUPPET_TOKEN }
-    //   : undefined,
+    puppetOptions: buildPuppetOptions(),
   })
 
   bot.use(EventLogger())
